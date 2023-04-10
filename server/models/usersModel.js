@@ -9,20 +9,20 @@ export async function createUserModel({ name, surname, username }) {
             [name, surname, username]
         );
     } catch (error) {
-        throw new Error(`Произошла ошибка при создание пользователя ${error}`);
-    } finally {
-        return data;
+        throw new Error(`Произошла ошибка при создании пользователя ${error}`);
     }
+
+    return data;
 }
 
 export async function getUsersModel() {
     let data;
 
     try {
-        data = await db.query("SELECT * FROM userss");
+        data = await db.query("SELECT * FROM users");
     } catch (error) {
         throw new Error(
-            `Произошла ошибка при получение пользователей: ${error.message}`
+            `Произошла ошибка при получении пользователей: ${error.message}`
         );
     }
 
@@ -36,11 +36,11 @@ export async function getOneUserModel(id) {
         data = await db.query("SELECT * FROM users WHERE id = $1", [id]);
     } catch (error) {
         throw new Error(
-            `Произошла ошибка при получение пользователя: ${error.message}`
+            `Произошла ошибка при получении пользователя: ${error.message}`
         );
-    } finally {
-        return data;
     }
+
+    return data;
 }
 
 export async function updateUserModel({ id, name, surname, username }) {
@@ -53,25 +53,31 @@ export async function updateUserModel({ id, name, surname, username }) {
         );
     } catch (error) {
         throw new Error(
-            `Произошла ошибка при обновление пользователя: ${error.message}`
+            `Произошла ошибка при обновлении пользователя: ${error.message}`
         );
-    } finally {
-        return data;
     }
+
+    return data;
 }
 
 export async function deleteUserModel(id) {
-    let data;
+    let userData, postData;
 
     try {
-        data = await db.query("DELETE FROM users WHERE id = $1 RETURNING *", [
-            id,
-        ]);
+        userData = await db.query(
+            "DELETE FROM users WHERE id = $1 RETURNING *",
+            [id]
+        );
+
+        postData = await db.query(
+            "DELETE FROM posts WHERE user_id = $1 RETURNING *",
+            [id]
+        );
     } catch (error) {
         throw new Error(
-            `Произошла ошибка при удаление пользователя: ${error.message}`
+            `Произошла ошибка при удалении пользователя: ${error.message}`
         );
-    } finally {
-        return data;
     }
+
+    return userData;
 }

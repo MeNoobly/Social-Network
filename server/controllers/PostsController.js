@@ -1,19 +1,19 @@
 import {
-    createUserModel,
-    getUsersModel,
-    getOneUserModel,
-    updateUserModel,
-    deleteUserModel,
-} from "../models/UsersModel.js";
+    createPostModel,
+    getPostsModel,
+    getOnePostModel,
+    updatePostModel,
+    deletePostModel,
+} from "../models/PostsModel.js";
 
-class usersController {
-    async createUser(request, response) {
-        const { name, surname, username } = request.body;
+class postsController {
+    async createPost(request, response) {
+        const { title, body, user_id } = request.body;
 
         let action;
 
         try {
-            action = await createUserModel({ name, surname, username });
+            action = await createPostModel({ title, body, user_id });
         } catch (error) {
             return response.status(403).json(error.message);
         }
@@ -23,11 +23,11 @@ class usersController {
         }
     }
 
-    async getUsers(request, response) {
+    async getPosts(request, response) {
         let action;
 
         try {
-            action = await getUsersModel();
+            action = await getPostsModel();
         } catch (error) {
             return response.status(403).json(error.message);
         }
@@ -37,12 +37,12 @@ class usersController {
         }
     }
 
-    async getOneUser(request, response) {
+    async getOnePost(request, response) {
         const id = request.params.id;
         let action;
 
         try {
-            action = await getOneUserModel(id);
+            action = await getOnePostModel(id);
         } catch (error) {
             return response.status(403).json(error.message);
         }
@@ -52,13 +52,13 @@ class usersController {
         }
     }
 
-    async updateUser(request, response) {
+    async updatePost(request, response) {
         const id = request.params.id;
-        const { name, surname, username } = request.body;
+        const { title, body } = request.body;
         let action;
 
         try {
-            action = await updateUserModel({ id, name, surname, username });
+            action = await updatePostModel({ id, title, body });
         } catch (error) {
             return response.status(403).json(error.message);
         }
@@ -68,12 +68,12 @@ class usersController {
         }
     }
 
-    async deleteUser(request, response) {
+    async deletePost(request, response) {
         const id = request.params.id;
         let action;
 
         try {
-            action = await deleteUserModel(id);
+            action = await deletePostModel(id);
         } catch (error) {
             return response.status(403).json(error.message);
         }
@@ -84,4 +84,4 @@ class usersController {
     }
 }
 
-export default new usersController();
+export default new postsController();
