@@ -1,1 +1,2 @@
 .prettierrc.json
+/server/node_modules
