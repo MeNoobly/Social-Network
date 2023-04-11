@@ -2,11 +2,12 @@ import db from "../db.js";
 
 export async function createPostModel({ title, body, user_id }) {
     let data;
+    const date = new Date();
 
     try {
         data = await db.query(
-            "INSERT INTO posts (title, body, user_id) values ($1, $2, $3) RETURNING *",
-            [title, body, user_id]
+            "INSERT INTO posts (date, title, body, user_id) values ($1, $2, $3, $4) RETURNING *",
+            [date, title, body, user_id]
         );
     } catch (error) {
         throw new Error(`Произошла ошибка при создании поста ${error}`);

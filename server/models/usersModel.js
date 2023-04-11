@@ -2,11 +2,12 @@ import db from "../db.js";
 
 export async function createUserModel({ name, surname, username }) {
     let data;
+    const date = new Date();
 
     try {
         data = await db.query(
-            "INSERT INTO users (name, surname, username) values ($1, $2, $3) RETURNING *",
-            [name, surname, username]
+            "INSERT INTO users (date, name, surname, username) values ($1, $2, $3, $4) RETURNING *",
+            [date, name, surname, username]
         );
     } catch (error) {
         throw new Error(`Произошла ошибка при создании пользователя ${error}`);
