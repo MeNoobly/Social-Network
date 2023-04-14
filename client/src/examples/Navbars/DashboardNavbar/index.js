@@ -30,7 +30,6 @@ import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
-import MDInput from "components/MDInput";
 
 // Material Dashboard 2 React example components
 import Breadcrumbs from "examples/Breadcrumbs";
@@ -88,7 +87,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
 
   const handleMiniSidenav = () => setMiniSidenav(dispatch, !miniSidenav);
   const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
-  const handleOpenMenu = (event) => setOpenMenu(event.currentTarget);
+  // const handleOpenMenu = (event) => setOpenMenu(event.currentTarget);
   const handleCloseMenu = () => setOpenMenu(false);
 
   // Render the notifications menu
@@ -135,9 +134,6 @@ function DashboardNavbar({ absolute, light, isMini }) {
         </MDBox>
         {isMini ? null : (
           <MDBox sx={(theme) => navbarRow(theme, { isMini })}>
-            <MDBox pr={1}>
-              <MDInput label="Search here" />
-            </MDBox>
             <MDBox color={light ? "white" : "inherit"}>
               <Link to="/authentication/sign-in/basic">
                 <IconButton sx={navbarIconButton} size="small" disableRipple>
@@ -164,7 +160,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
               >
                 <Icon sx={iconsStyle}>settings</Icon>
               </IconButton>
-              <IconButton
+              {/* <IconButton
                 size="small"
                 disableRipple
                 color="inherit"
@@ -175,7 +171,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 onClick={handleOpenMenu}
               >
                 <Icon sx={iconsStyle}>notifications</Icon>
-              </IconButton>
+              </IconButton> */}
               {renderMenu()}
             </MDBox>
           </MDBox>
