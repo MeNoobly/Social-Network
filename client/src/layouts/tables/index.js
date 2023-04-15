@@ -13,8 +13,8 @@ import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import authorsTableData from "layouts/tables/data/authorsTableData";
-import projectsTableData from "layouts/tables/data/projectsTableData";
+import authorsTableData from "layouts/tables/data/usersTableData";
+import projectsTableData from "layouts/tables/data/postsTableData";
 
 function Tables() {
   const { columns, rows } = authorsTableData();
@@ -65,7 +65,7 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Projects Table
+                  Posts Table
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>
