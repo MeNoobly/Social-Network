@@ -19,10 +19,9 @@ Coded by www.creative-tim.com
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
-import MDBadge from "components/MDBadge";
 
 // Images
-import team2 from "assets/images/team-2.jpg";
+import createAuthor from "functions/author/createAuthor";
 
 export const Author = ({ image, name, email }) => (
   <MDBox display="flex" alignItems="center" lineHeight={1}>
@@ -46,35 +45,24 @@ export const Job = ({ title, description }) => (
 );
 
 export default function data() {
+  const dataOfAuthors = [
+    {
+      name: "Nick",
+      email: "84956743974@mail.ru",
+      title: "Programmer",
+      status: "online",
+      registrationDate: "19/11/2003",
+    },
+  ];
+
   return {
     columns: [
-      { Header: "author", accessor: "author", width: "45%", align: "left" },
+      { Header: "author", accessor: "author", width: "55%", align: "left" },
       { Header: "role", accessor: "role", align: "center" },
       { Header: "status", accessor: "status", align: "center" },
       { Header: "registered", accessor: "registered", align: "center" },
-      { Header: "action", accessor: "action", align: "center" },
     ],
 
-    rows: [
-      {
-        author: <Author image={team2} name="John Michael" email="john@creative-tim.com" />,
-        role: <Job title="Manager" description="" />,
-        status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
-          </MDBox>
-        ),
-        registered: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            23/04/18
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </MDTypography>
-        ),
-      },
-    ],
+    rows: dataOfAuthors.map((author) => createAuthor(author)),
   };
 }
